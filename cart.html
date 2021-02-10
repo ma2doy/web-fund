@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Shop</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.cart.css">
+</head>
+<body>
+    <h2 class="ti">3la dinar y madame</h2>
+    <div class="container">
+        <div class="articles">
+            <div>
+                <img src="https://thumblr.uniid.it/product/182844/64b7e5012998.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand1">Nike</h3>
+                    <h4 id="price1">19.90</h4>
+                    <h4>$</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity1" name="quantity1" min="1" max="99" value="1">
+                    <select id="size1" name="size1" onclick="deleteE('message1')">
+                        <option value="size" disabled selected>Size</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(1)">Add</button>
+                    </div>
+                </div>
+                <p id="message1"></p>
+            </div>
+            <div>
+                <img src="https://cdn.mainlinemenswear.co.uk/f_auto,q_auto/mainlinemenswear/shopimages/products/132622/Mainimage.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand2">Levi's</h3>
+                    <h4 id="price2">19.90</h4>
+                    <h4>$</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity2" name="quantity2" min="1" max="99" value="1">
+                    <select id="size2" name="size2" onclick="deleteE('message2')">
+                        <option value="size" disabled selected>Size</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(2)">Add</button>
+                    </div>
+                </div>
+                <p id="message2"></p>
+            </div>
+            <div>
+                <img src="https://cdn.laredoute.com/products/641by641/d/6/9/d69b7afe294baa8f193e99a214086f40.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand3">Puma</h3>
+                    <h4 id="price3">16.90</h4>
+                    <h4>$</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity3" name="quantity3" min="1" max="99" value="1">
+                    <select id="size3" name="size3" onclick="deleteE('message3')">
+                        <option value="size" disabled selected>Size</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(3)">Add</button>
+                    </div>
+                </div>
+                <p id="message3"></p>
+            </div>
+            <div>
+                <img src="https://s3-eu-west-1.amazonaws.com/images.linnlive.com/5700a9add8d374680562798fca5633f9/14fb814e-5129-47cb-a940-c265fdc5abf7.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand4">Adidas</h3>
+                    <h4 id="price4">18.90</h4>
+                    <h4>$</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity4" name="quantity4" min="1" max="99" value="1">
+                    <select id="size4" name="size4" onclick="deleteE('message4')">
+                        <option value="size" disabled selected>Size</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(4)">Add</button>
+                    </div>
+                </div>
+                <p id="message4"></p>
+            </div>
+        </div>
+        <div class="cart">
+            <h3 class="tit">L9adhya</h3>
+            <ul id="items">
+            </ul> 
+            <h3 id="total" style="text-align: right;">Total: 0 $</h3>
+        </div>
+    </div>
+    <script>
+        var total = 0;
+        var i = 1;
+        var message = "Please select a size";
+        var itemCost = [];
+        function add(n){
+            sizeId = "size" + n;
+            messageId = "message" + n;
+            size = document.getElementById(sizeId).value;
+            if (size==="size"){
+                document.getElementById(messageId).innerHTML = message;
+                return 0;
+            }
+            brand = "brand" + n;
+            priceId = "price" + n;
+            quantityId = "quantity" + n;
+
+            name = document.getElementById(brand).innerHTML;
+            price = document.getElementById(priceId).innerHTML;
+            quantity = document.getElementById(quantityId).value;
+            var node = document.createElement("LI");
+            item = "item"+i;
+            node.setAttribute("id", item)
+            itemCost[i-1] = Number(price) * Number(quantity);
+            i += 1;
+            var textnode = document.createTextNode(name+" "+quantity+" x "+price+" $, size: "+ size);
+            node.appendChild(textnode);
+            document.getElementById("items").appendChild(node);
+            total += Number(price) * Number(quantity);
+            document.getElementById("total").innerHTML = "Total: " + total.toFixed(2) + " $";
+            document.getElementById(item).innerHTML += '<button onclick="deleItem('+"'"+item+"'"+')">x</button>';
+        }
+         function deleteE(eId) {
+            document.getElementById(eId).innerHTML = ' ';
+        }
+        function deleItem(eId){
+            document.getElementById(eId).remove();
+            n = Number(eId.slice(-1)) - 1;
+            total -= itemCost[n];
+            document.getElementById("total").innerHTML = "Total: " + total.toFixed(2) + " $"; 
+        }
+    </script>
+</body>
+</html>
